@@ -1,0 +1,7 @@
+{
+  "name": "ionic-basic-budget-planner",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
