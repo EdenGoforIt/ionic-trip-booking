@@ -7,3 +7,8 @@
 
 ## how to start ionic project
 - `ionic serve`
+
+
+## how to create a component
+- `ng g c recipes`
+- `ionic generate`
