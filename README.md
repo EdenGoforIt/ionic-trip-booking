@@ -9,6 +9,6 @@
 - `ionic serve`
 
 
-## how to create a component
+## how to create a component (use one or the other)
 - `ng g c recipes`
 - `ionic generate`
