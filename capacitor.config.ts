@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'ionic-basic-budget-planner',
+  appId: 'ionic.budget.planner',
+  appName: 'ionic-budget-planner',
   webDir: 'www',
   bundledWebRuntime: false
 };
