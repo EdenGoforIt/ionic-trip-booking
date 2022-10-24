@@ -15,16 +15,12 @@ const routes: Routes = [
   {
     path: 'places',
     loadChildren: () =>
-      import('./places/discover/discover.module').then(
-        (m) => m.DiscoverPageModule
-      ),
+      import('./places/places.module').then((m) => m.PlacesPageModule),
   },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
-  ],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

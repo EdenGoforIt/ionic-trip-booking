@@ -5,7 +5,7 @@ import { PlacesPage } from './places.page';
 
 const routes: Routes = [
   {
-    path: 'tab',
+    path: 'tabs',
     component: PlacesPage,
     children: [
       {
@@ -58,7 +58,17 @@ const routes: Routes = [
           },
         ],
       },
+      {
+        path: '',
+        redirectTo: '/places/tabs/discover',
+        pathMatch: 'full',
+      },
     ],
+  },
+  {
+    path: '',
+    redirectTo: '/places/tabs/discover',
+    pathMatch: 'full',
   },
 ];
 
