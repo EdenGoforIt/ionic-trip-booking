@@ -52,7 +52,7 @@ const routes: Routes = [
           {
             path: ':placeId',
             loadChildren: () =>
-              import('./offer-bookings/offer-bookings.module').then(
+              import('./offers/offer-bookings/offer-bookings.module').then(
                 (m) => m.OfferBookingsPageModule
               ),
           },
