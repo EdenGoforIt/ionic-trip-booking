@@ -14,6 +14,9 @@
 
 - `ionic serve`
 
+## how to generate a page
+- `ionic generate page places/place`
+
 ## how to create a component (use one or the other)
 
 - `ng g c recipes`
