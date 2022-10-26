@@ -16,7 +16,5 @@ export class AuthPage implements OnInit {
     this.authService.login();
     this.router.navigateByUrl('/places/tabs/discover');
   }
-  logout() {
-    this.authService.logout();
-  }
+
 }
