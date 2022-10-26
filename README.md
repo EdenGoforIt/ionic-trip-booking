@@ -18,9 +18,8 @@
 - `ionic generate page places/place`
 
 ## how to create a component (use one or the other)
-
-- `ng g c recipes`
-- `ionic generate`
+ 
+- `ionic generate component places/place`
 
 ## what version of android API should be installed
 

@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class AuthService {
-  _isAuthenticated = false;
+  _isAuthenticated = true;
   get isAuthenticated(): boolean {
     return this._isAuthenticated;
   }
@@ -13,6 +13,6 @@ export class AuthService {
   }
 
   logout() {
-    this._isAuthenticated = false;
+    this._isAuthenticated = true;
   }
 }
