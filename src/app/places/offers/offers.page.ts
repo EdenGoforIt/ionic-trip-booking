@@ -14,4 +14,6 @@ export class OffersPage implements OnInit {
   ngOnInit() {
     this.offers = this.placesService.places;
   }
+  onEdit(offerId: number): void {}
+  onDelete(offerId: number): void {}
 }
