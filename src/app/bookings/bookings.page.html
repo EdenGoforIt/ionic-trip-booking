@@ -5,4 +5,24 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col sizeMd="6" offsetMd="2">
+        <ion-list>
+          <ion-item-sliding *ngFor="let booking of bookings" #slidingBooking>
+            <ion-item>
+              <ion-label><h5>{{booking.placeTitle}}</h5></ion-label>
+              <p>Guests: {{booking.guestNumber}}</p>
+            </ion-item>
+            <ion-item-options>
+              <ion-item-option color="danger" (click)="onDelete(booking.id, slidingBooking)">
+                <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
