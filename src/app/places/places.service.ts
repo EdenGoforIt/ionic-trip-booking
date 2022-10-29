@@ -27,6 +27,13 @@ export class PlacesService {
       'https://media.cntraveler.com/photos/62cde49f21a63704d1627e0a/master/w_1600,c_limit/Park%20Hyatt%20Niseko%20Hanazono-PRINT%20(1).jpg',
       432
     ),
+    new Place(
+      4,
+      'England',
+      'Plain Food',
+      'https://media.cntraveler.com/photos/62cde49f21a63704d1627e0a/master/w_1600,c_limit/Park%20Hyatt%20Niseko%20Hanazono-PRINT%20(1).jpg',
+      432
+    ),
   ];
 
   constructor() {}
