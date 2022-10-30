@@ -21,8 +21,11 @@
           type="submit"
           color="danger"
           expand="block"
-          >Sign In</ion-button
-        >
+          [disabled]="isLoading"
+          >Sign In
+
+          <ion-spinner *ngIf="isLoading" color="primary"></ion-spinner>
+        </ion-button>
         <a [routerLink]="['/forgot-password']" expand="block"
           >Forgot Password?</a
         >
