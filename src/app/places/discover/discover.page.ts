@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { MenuController, SegmentChangeEventDetail } from '@ionic/angular';
 import { Place } from '../places.model';
 import { PlacesService } from './../places.service';
 
@@ -20,5 +20,13 @@ export class DiscoverPage implements OnInit {
   }
   onOpenMenu() {
     this.menuCtrl.toggle();
+  }
+  onFilterUpdate(event: CustomEvent<SegmentChangeEventDetail>): void {
+    console.log(event.detail?.value);
+    if (event.detail?.value === 'all') {
+      this.places = this.placesService.places.filter((x) => x.id > 0);
+    } else {
+      this.places = this.placesService.places.filter((x) => x.id > 3);
+    }
   }
 }

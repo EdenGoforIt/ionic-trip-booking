@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { Injectable } from '@angular/core';
 import { Place } from './places.model';
 
@@ -32,6 +33,13 @@ export class PlacesService {
       'England',
       'Plain Food',
       'https://media.cntraveler.com/photos/62cde49f21a63704d1627e0a/master/w_1600,c_limit/Park%20Hyatt%20Niseko%20Hanazono-PRINT%20(1).jpg',
+      432
+    ),
+    new Place(
+      5,
+      'Auckland',
+      'Plain Food',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Tourist_Destinations_%28252026181%29.jpeg/800px-Tourist_Destinations_%28252026181%29.jpeg',
       432
     ),
   ];
