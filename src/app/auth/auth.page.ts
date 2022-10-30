@@ -14,7 +14,7 @@ export class AuthPage implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
   ) {}
 
   ngOnInit() {}
@@ -32,7 +32,7 @@ export class AuthPage implements OnInit {
           // this.isLoading = false;
           loadingElement.dismiss();
           this.router.navigateByUrl('/places/tabs/discover');
-        }, 2000);
+        }, 500);
       });
   }
 }
