@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { AuthService } from './auth.service';
@@ -9,15 +10,19 @@ import { AuthService } from './auth.service';
   styleUrls: ['./auth.page.scss'],
 })
 export class AuthPage implements OnInit {
+  @ViewChild('form', { static: true }) form: NgForm;
+
   isLoading = false;
   isAuthenticated = false;
   constructor(
     private authService: AuthService,
     private router: Router,
-    private loadingCtrl: LoadingController,
+    private loadingCtrl: LoadingController
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('form', this.form);
+  }
   onLogin() {
     this.authService.login();
     // this.isLoading = true;
@@ -34,5 +39,11 @@ export class AuthPage implements OnInit {
           this.router.navigateByUrl('/places/tabs/discover');
         }, 500);
       });
+  }
+
+  onSubmit(event: NgForm) {
+    console.log('form', this.form);
+
+    console.log('event', event);
   }
 }
