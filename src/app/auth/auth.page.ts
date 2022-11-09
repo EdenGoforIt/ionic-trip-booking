@@ -14,6 +14,7 @@ export class AuthPage implements OnInit {
 
   isLoading = false;
   isAuthenticated = false;
+  isLogin = true;
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -45,5 +46,10 @@ export class AuthPage implements OnInit {
     console.log('form', this.form);
 
     console.log('event', event);
+    this.onLogin();
+  }
+
+  onSwitchAuthMode() {
+    this.isLogin = !this.isLogin;
   }
 }
