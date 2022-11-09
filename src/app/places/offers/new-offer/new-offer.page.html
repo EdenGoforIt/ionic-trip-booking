@@ -3,8 +3,70 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="places/tabs/offers"> </ion-back-button>
     </ion-buttons>
-    <ion-title>new-offer</ion-title>
+    <ion-title>New Offer</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="onCreateOffer()">
+        <ion-icon name="checkmark" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content>
+  <form [formGroup]="form">
+    <ion-grid>
+      <ion-row>
+        <ion-col sizeSm="6" offsetSm="3">
+          <ion-item>
+            <ion-label>Title</ion-label>
+            <ion-input
+              type="text"
+              autocorrect="auto"
+              formControlName="title"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col sizeSm="6" offsetSm="3">
+          <ion-item>
+            <ion-label>Short Description</ion-label>
+            <ion-textarea
+              formControlName="description"
+              rows="3"
+              autocorrect="auto"
+            ></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col sizeSm="6" offsetSm="3">
+          <ion-item>
+            <ion-label>price</ion-label>
+            <ion-input
+              type="number"
+              autocorrect="auto"
+              formControlName="price"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col sizeSm="6" offsetSm="3">
+          <ion-item>
+            <ion-label>Available From</ion-label>
+            <ion-datetime formControlName="dateFrom"></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col sizeSm="6" offsetSm="3">
+          <ion-item>
+            <ion-label>Available To</ion-label>
+            <ion-datetime formControlName="dateTo"></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

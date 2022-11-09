@@ -42,11 +42,16 @@ export class AuthPage implements OnInit {
       });
   }
 
-  onSubmit(event: NgForm) {
-    console.log('form', this.form);
+  onSubmit() {
+    if (!this.form.valid) {
+      return;
+    }
 
-    console.log('event', event);
-    this.onLogin();
+    if (this.isLogin) {
+      this.onLogin();
+    } else {
+      // sign up
+    }
   }
 
   onSwitchAuthMode() {

@@ -3,6 +3,7 @@ import { NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Place } from '../../places.model';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-offer',
@@ -11,6 +12,7 @@ import { Place } from '../../places.model';
 })
 export class NewOfferPage implements OnInit {
   place: Place;
+  form: FormGroup;
   constructor(
     private route: ActivatedRoute,
     private navCtrl: NavController,
@@ -18,12 +20,39 @@ export class NewOfferPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe((paramMap) => {
-      if (!paramMap.has('placeId')) {
-        this.navCtrl.navigateBack('/places/tabs/offers');
-      }
-      const id = paramMap.get('placeId');
-      this.place = this.placesService.places.find((x) => x.id === +id);
+    this.form = new FormGroup({
+      title: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required],
+      }),
+      description: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required, Validators.maxLength(180)],
+      }),
+      price: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required],
+      }),
+      dateFrom: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required],
+      }),
+      dateTo: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required],
+      }),
     });
+    // this.route.paramMap.subscribe((paramMap) => {
+    //   console.log(paramMap.has('placeId'));
+    //   if (!paramMap.has('placeId')) {
+    //     this.navCtrl.navigateBack('/places/tabs/offers');
+    //   }
+    //   const id = paramMap.get('placeId');
+    //   this.place = this.placesService.places.find((x) => x.id === +id);
+    // });
+  }
+
+  onCreateOffer() {
+    console.log('this.form', this.form.value);
   }
 }
