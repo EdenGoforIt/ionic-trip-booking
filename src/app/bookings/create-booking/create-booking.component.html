@@ -51,31 +51,28 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col sizeSm="3" offsetSm="3">
+      <ion-col sizeSm="12">
         <ion-item>
-          <ion-label>
-            <ion-label position="floating">From </ion-label>
-            <ion-datetime
-              display-format="MMM DD YYYY"
-              picker-format="YY MMM DD"
-              ngModel
-              name="date-from"
-              #startDateCtrl="ngModel"
-            ></ion-datetime>
-          </ion-label>
+          <ion-label position="fixed">From </ion-label>
+          <ion-datetime
+            display-format="MMM DD YYYY"
+            picker-format="YY MMM DD"
+            ngModel
+            name="date-from"
+            #startDateCtrl="ngModel"
+          ></ion-datetime>
         </ion-item>
       </ion-col>
-      <ion-col sizeSm="3" offsetSm="3">
+      <ion-col sizeSm="12">
         <ion-item>
-          <ion-label>
-            <ion-label position="floating">To </ion-label>
-            <ion-datetime
-              display-format="MMM DD YYYY"
-              picker-format="YY MMM DD"
-              ngModel
-              name="date-to"
-            ></ion-datetime>
-          </ion-label>
+          <!-- TODO: [min] and [max] -->
+          <ion-label position="fixed">To </ion-label>
+          <ion-datetime
+            display-format="MMM DD YYYY"
+            picker-format="YY MMM DD"
+            ngModel
+            name="date-to"
+          ></ion-datetime>
         </ion-item>
       </ion-col>
     </ion-row>
