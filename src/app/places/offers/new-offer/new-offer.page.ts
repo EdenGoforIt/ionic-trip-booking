@@ -1,7 +1,7 @@
 import { PlacesService } from './../../places.service';
 import { NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Place } from '../../places.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -16,7 +16,8 @@ export class NewOfferPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private navCtrl: NavController,
-    private placesService: PlacesService
+    private placesService: PlacesService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -54,5 +55,15 @@ export class NewOfferPage implements OnInit {
 
   onCreateOffer() {
     console.log('this.form', this.form.value);
+    this.placesService.addPlace(
+      this.form.value.title,
+      this.form.value.description,
+      'https://picsum.photos/seed/picsum/200/300',
+      this.form.value.price,
+      this.form.value.availableFrom,
+      this.form.value.availableTo
+    );
+    this.form.reset();
+    this.router.navigate(['/places/tabs/offers']);
   }
 }

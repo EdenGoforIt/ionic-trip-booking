@@ -10,12 +10,12 @@
 </ion-header>
 <ion-content class="ion-padding">
   <h1>{{ this.selectedPlace.description }}</h1>
-  <form>
+  <form #f="ngForm">
     <ion-row>
       <ion-col sizeSm="6" offsetSm="3">
         <ion-item>
           <ion-label>
-            <ion-label position="floating"> First Name </ion-label>
+            <ion-label position="fixed"> First Name </ion-label>
             <ion-input
               type="text"
               ngModel
@@ -30,7 +30,7 @@
       <ion-col sizeSm="6" offsetSm="3">
         <ion-item>
           <ion-label>
-            <ion-label position="floating"> Last Name </ion-label>
+            <ion-label position="fixed"> Last Name </ion-label>
             <ion-input type="text" ngModel name="lastName" required></ion-input>
           </ion-label>
         </ion-item>
@@ -40,7 +40,7 @@
       <ion-col sizeSm="6" offsetSm="3">
         <ion-item>
           <ion-label>
-            <ion-label position="floating"> Number of Guests </ion-label>
+            <ion-label position="fixed"> Number of Guests </ion-label>
             <ion-select [ngModel]="'2'" name="guestNumber">
               <ion-select-option value="1">1</ion-select-option>
               <ion-select-option value="2">2</ion-select-option>
@@ -77,7 +77,11 @@
       </ion-col>
     </ion-row>
   </form>
-  <ion-button id="submit-button" (click)="onBookPlace()" color="success"
+  <ion-button
+    id="submit-button"
+    (click)="onBookPlace()"
+    color="success"
+    [disabled]="!f.valid"
     >BOOK PLACE</ion-button
   >
 </ion-content>
