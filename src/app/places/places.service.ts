@@ -3,7 +3,7 @@ import { AuthService } from './../auth/auth.service';
 import { Injectable } from '@angular/core';
 import { Place } from './places.model';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, map, take } from 'rxjs/operators';
+import { delay, filter, map, take, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -62,7 +62,7 @@ export class PlacesService {
     ),
   ]);
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
   get places(): Observable<Place[]> {
     return this._places.asObservable();
@@ -99,8 +99,8 @@ export class PlacesService {
       this.authService.userId
     );
 
-    this.places.pipe(take(1)).subscribe((places) => {
+    return this.places.pipe(take(1), delay(3000), tap((places) => {
       this._places.next(places.concat(newPlace));
-    });
+    }));
   }
 }
