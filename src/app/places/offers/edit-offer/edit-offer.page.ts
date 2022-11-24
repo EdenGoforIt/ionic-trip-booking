@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { Place } from '../../places.model';
 import { PlacesService } from './../../places.service';
 
@@ -13,11 +15,13 @@ import { PlacesService } from './../../places.service';
 export class EditOfferPage implements OnInit {
   place: Place;
   form: FormGroup;
+  private readonly destroy$ = new Subject<void>();
+
   constructor(
     private route: ActivatedRoute,
     private placesService: PlacesService,
     private navCtrl: NavController
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe((paramMap) => {
@@ -25,7 +29,7 @@ export class EditOfferPage implements OnInit {
         this.navCtrl.navigateBack('/places/tabs/offers');
       }
       const id = +paramMap.get('placeId');
-      this.place = this.placesService.getPlace(id);
+      this.placesService.getPlace(id).pipe(takeUntil(this.destroy$)).subscribe(place => this.place = place);
       this.form = new FormGroup({
         title: new FormControl(this.place.title, {
           updateOn: 'blur',

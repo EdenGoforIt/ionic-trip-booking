@@ -1,3 +1,5 @@
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { CreateBookingComponent } from './../../../bookings/create-booking/create-booking.component';
 import { Place } from './../../places.model';
 import { Component, OnInit } from '@angular/core';
@@ -16,13 +18,14 @@ import { PlacesService } from './../../places.service';
 })
 export class PlaceDetailPage implements OnInit {
   place: Place;
+  private readonly destroy$ = new Subject<void>();
   constructor(
     private navCtrl: NavController,
     private route: ActivatedRoute,
     private placesService: PlacesService,
     private modalCtrl: ModalController,
     private actionSheetCtrl: ActionSheetController
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe((paramMap) => {
@@ -30,7 +33,7 @@ export class PlaceDetailPage implements OnInit {
         this.navCtrl.navigateBack('/places/tabs/offers');
       }
       const id = +paramMap.get('placeId');
-      this.place = this.placesService.getPlace(id);
+      this.placesService.getPlace(id).pipe(takeUntil(this.destroy$)).subscribe(place => this.place = place);
     });
   }
   onBookPlace(): void {
