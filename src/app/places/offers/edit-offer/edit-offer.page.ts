@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoadingController, NavController } from '@ionic/angular';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Place } from '../../places.model';
@@ -20,7 +20,9 @@ export class EditOfferPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private placesService: PlacesService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private router: Router,
+    private loadingCtrl: LoadingController
   ) { }
 
   ngOnInit() {
@@ -47,7 +49,20 @@ export class EditOfferPage implements OnInit {
     if (this.form.invalid) {
       return;
     }
+    this.loadingCtrl.create({
+      message: 'Updating place ...'
+    }).then(loadingEl => {
+      loadingEl.present();
+    });
 
-    console.log(this.form.value);
+
+    this.placesService.updateOffer(this.place.id, this.form.value.title, this.form.value.description).subscribe(
+      () => {
+        this.loadingCtrl.dismiss();
+        this.form.reset();
+        this.router.navigate(['/places/tabs/offers']);
+
+      }
+    );
   }
 }

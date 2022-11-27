@@ -104,9 +104,10 @@ export class PlacesService {
     }));
   }
 
-  updateOffer(placeId: number, title: string, description: string): void {
-    this.places.pipe(
+  updateOffer(placeId: number, title: string, description: string): Observable<Place[]> {
+    return this.places.pipe(
       take(1),
+      delay(1500),
       tap((places) => {
         const updatingIndex = places.findIndex(pl => pl.id === placeId);
         const updatedPlaces = [...places];
