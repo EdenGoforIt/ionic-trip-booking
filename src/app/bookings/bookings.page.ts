@@ -13,11 +13,11 @@ export class BookingsPage implements OnInit {
   constructor(private bookingService: BookingService) {}
 
   ngOnInit() {
-    this.bookings = this.bookingService.bookings;
+    // this.bookings = this.bookingService.bookings;
   }
   onDelete(bookingId: number, slidingBooking: IonItemSliding) {
     slidingBooking.close();
     this.bookingService.delete(bookingId);
-    this.bookings = this.bookingService.bookings;
+    // this.bookings = this.bookingService.bookings;
   }
 }

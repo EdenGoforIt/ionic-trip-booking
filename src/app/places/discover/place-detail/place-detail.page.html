@@ -7,6 +7,26 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-button color="primary" (click)="onBookPlace()">Book</ion-button>
+<ion-content class="ion-no-padding">
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col sizeSm="6" offsetSm="3">
+        <ion-img [src]="place.imageUrl"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col sizeSm="6" offsetSm="3" class="ion-text-center ion-padding">
+        <p>{{ place.description}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+<ion-footer>
+  <ion-row>
+    <ion-col sizeSm="6" offsetSm="3" class="ion-text-center">
+      <ion-button expand="full" color="primary" (click)="onBookPlace()"
+        >Book</ion-button
+      >
+    </ion-col>
+  </ion-row>
+</ion-footer>
