@@ -62,7 +62,7 @@ export class PlacesService {
     ),
   ]);
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
   get places(): Observable<Place[]> {
     return this._places.asObservable();
@@ -98,18 +98,28 @@ export class PlacesService {
       availableTo,
       this.authService.userId
     );
+    return this.places.pipe(
+      take(1),
+      delay(2000),
+      tap((places) => {
+        console.log('places :', places);
+        console.log('newPlace :', newPlace);
 
-    return this.places.pipe(take(1), delay(3000), tap((places) => {
-      this._places.next(places.concat(newPlace));
-    }));
+        this._places.next(places.concat(newPlace));
+      })
+    );
   }
 
-  updateOffer(placeId: number, title: string, description: string): Observable<Place[]> {
+  updateOffer(
+    placeId: number,
+    title: string,
+    description: string
+  ): Observable<Place[]> {
     return this.places.pipe(
       take(1),
       delay(1500),
       tap((places) => {
-        const updatingIndex = places.findIndex(pl => pl.id === placeId);
+        const updatingIndex = places.findIndex((pl) => pl.id === placeId);
         const updatedPlaces = [...places];
         const oldPlace = updatedPlaces[updatingIndex];
         updatedPlaces[updatingIndex] = new Place(
@@ -123,7 +133,7 @@ export class PlacesService {
           oldPlace.userId
         );
         this._places.next(updatedPlaces);
-      }
-      ));
+      })
+    );
   }
 }

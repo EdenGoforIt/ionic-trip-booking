@@ -23,6 +23,7 @@ export class BookingsPage implements OnInit, OnDestroy {
     this.bookingService.bookings
       .pipe(takeUntil(this.destroy$))
       .subscribe((bookings) => {
+        console.log('bookings :', bookings);
         this.bookings = bookings;
       });
   }

@@ -1,3 +1,4 @@
+import { BookingService } from './../../../bookings/booking.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { CreateBookingComponent } from './../../../bookings/create-booking/create-booking.component';
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   ActionSheetController,
+  LoadingController,
   ModalController,
   NavController,
 } from '@ionic/angular';
@@ -24,8 +26,10 @@ export class PlaceDetailPage implements OnInit {
     private route: ActivatedRoute,
     private placesService: PlacesService,
     private modalCtrl: ModalController,
-    private actionSheetCtrl: ActionSheetController
-  ) { }
+    private actionSheetCtrl: ActionSheetController,
+    private loadingCtrl: LoadingController,
+    private bookingService: BookingService
+  ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((paramMap) => {
@@ -33,7 +37,10 @@ export class PlaceDetailPage implements OnInit {
         this.navCtrl.navigateBack('/places/tabs/offers');
       }
       const id = +paramMap.get('placeId');
-      this.placesService.getPlace(id).pipe(takeUntil(this.destroy$)).subscribe(place => this.place = place);
+      this.placesService
+        .getPlace(id)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((place) => (this.place = place));
     });
   }
   onBookPlace(): void {
@@ -78,8 +85,27 @@ export class PlaceDetailPage implements OnInit {
         modalElement.present();
         return modalElement.onDidDismiss();
       })
-      .then((data) => {
-        console.log('got data', data);
+      .then((resultData) => {
+        console.log('resultData', resultData);
+        this.loadingCtrl
+          .create({ message: 'Creating Booking' })
+          .then((loadingEl) => {
+            loadingEl.present();
+            this.bookingService
+              .add(
+                this.place.id,
+                this.place.title,
+                this.place.imageUrl,
+                resultData.data.data.firstName,
+                resultData.data.data.lastName,
+                +resultData.data.data.guestNumber,
+                new Date(resultData.data.data['date-from']),
+                new Date(resultData.data.data['date-to'])
+              )
+              .subscribe(() => {
+                loadingEl.dismiss();
+              });
+          });
       });
   }
 }
