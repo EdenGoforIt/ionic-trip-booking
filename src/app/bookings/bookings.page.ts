@@ -23,13 +23,14 @@ export class BookingsPage implements OnInit, OnDestroy {
     this.bookingService.bookings
       .pipe(takeUntil(this.destroy$))
       .subscribe((bookings) => {
-        console.log('bookings :', bookings);
         this.bookings = bookings;
       });
   }
-  onDelete(bookingId: number, slidingBooking: IonItemSliding) {
+  onCancelBooking(bookingId: number, slidingBooking: IonItemSliding) {
     slidingBooking.close();
-    this.bookingService.delete(bookingId);
-    // this.bookings = this.bookingService.bookings;
+    this.bookingService
+      .delete(bookingId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe();
   }
 }

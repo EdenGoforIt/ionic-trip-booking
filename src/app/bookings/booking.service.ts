@@ -20,7 +20,8 @@ export class BookingService {
       delay(1000),
       tap((bookings) => {
         const newBookings = bookings.filter((x) => x.id !== id);
-        this._bookings.next(bookings.concat(newBookings));
+
+        this._bookings.next(newBookings);
       })
     );
   }

@@ -16,7 +16,10 @@
               <p>Guests: {{booking.guestNumber}}</p>
             </ion-item>
             <ion-item-options>
-              <ion-item-option color="danger" (click)="onDelete(booking.id, slidingBooking)">
+              <ion-item-option
+                color="danger"
+                (click)="onCancelBooking(booking.id, slidingBooking)"
+              >
                 <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
               </ion-item-option>
             </ion-item-options>
