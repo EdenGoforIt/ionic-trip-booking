@@ -1,5 +1,5 @@
 import { takeUntil } from 'rxjs/operators';
-import { IonItemSliding } from '@ionic/angular';
+import { IonItemSliding, LoadingController } from '@ionic/angular';
 import { Booking } from './booking.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BookingService } from './booking.service';
@@ -13,7 +13,10 @@ import { Subject } from 'rxjs';
 export class BookingsPage implements OnInit, OnDestroy {
   bookings: Booking[];
   readonly destroy$ = new Subject<any>();
-  constructor(private bookingService: BookingService) {}
+  constructor(
+    private bookingService: BookingService,
+    private loadingCtrl: LoadingController
+  ) {}
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
@@ -28,9 +31,14 @@ export class BookingsPage implements OnInit, OnDestroy {
   }
   onCancelBooking(bookingId: number, slidingBooking: IonItemSliding) {
     slidingBooking.close();
-    this.bookingService
-      .delete(bookingId)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe();
+    this.loadingCtrl.create({ message: 'Cancelling' }).then((loadingEl) => {
+      loadingEl.present();
+      this.bookingService
+        .delete(bookingId)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(() => {
+          loadingEl.dismiss();
+        });
+    });
   }
 }
