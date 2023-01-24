@@ -13,18 +13,24 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class OffersPage implements OnInit, OnDestroy {
   offers: Place[];
+  isLoading = true;
   private readonly destroy$ = new Subject<void>();
   constructor(private placesService: PlacesService, private router: Router) {}
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
 
   ngOnInit() {
     this.placesService.places
       .pipe(takeUntil(this.destroy$))
       .subscribe((offers) => (this.offers = offers));
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1000);
   }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   onEdit(offerId: number, slidingItem: IonItemSliding): void {
     slidingItem.close();
     this.router.navigate(['/', 'places', 'tabs', 'offers', 'edit', offerId]);

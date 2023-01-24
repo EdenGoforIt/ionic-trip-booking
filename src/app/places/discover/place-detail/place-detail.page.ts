@@ -1,3 +1,4 @@
+import { AuthService } from './../../../auth/auth.service';
 import { BookingService } from './../../../bookings/booking.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -20,6 +21,7 @@ import { PlacesService } from './../../places.service';
 })
 export class PlaceDetailPage implements OnInit {
   place: Place;
+  isBookable = false;
   private readonly destroy$ = new Subject<void>();
   constructor(
     private navCtrl: NavController,
@@ -28,7 +30,8 @@ export class PlaceDetailPage implements OnInit {
     private modalCtrl: ModalController,
     private actionSheetCtrl: ActionSheetController,
     private loadingCtrl: LoadingController,
-    private bookingService: BookingService
+    private bookingService: BookingService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -40,7 +43,12 @@ export class PlaceDetailPage implements OnInit {
       this.placesService
         .getPlace(id)
         .pipe(takeUntil(this.destroy$))
-        .subscribe((place) => (this.place = place));
+        .subscribe((place) => {
+          this.place = place;
+
+          // TODO: check if the place is bookable using user Id
+          this.isBookable = true;
+        });
     });
   }
   onBookPlace(): void {
