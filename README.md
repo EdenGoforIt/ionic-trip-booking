@@ -7,22 +7,28 @@
 ![image](https://user-images.githubusercontent.com/79078528/204155786-caf5909c-0843-4557-b7fb-b3d4eb8a38be.png)
 ![image](https://user-images.githubusercontent.com/79078528/204155788-94617b9a-f632-4462-a263-0d4d92c06ff2.png)
 
-
 ## how to create ionic project
 
 - `npm install -g @ionic/cli`
 - `ionic start`
 - choose a framework
 
+## run capacitor
+
+`ionic capacitor run android`
+`ionic capacitor run ios`
+
 ## how to start ionic project
 
+- `npm run start`
 - `ionic serve`
 
 ## how to generate a page
+
 - `ionic generate page places/place`
 
 ## how to create a component (use one or the other)
- 
+
 - `ionic generate component places/place`
 
 ## what version of android API should be installed
