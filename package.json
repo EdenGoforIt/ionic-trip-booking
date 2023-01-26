@@ -21,6 +21,7 @@
     "@angular/router": "^14.0.0",
     "@capacitor/android": "4.1.0",
     "@capacitor/app": "4.0.1",
+    "@capacitor/camera": "^4.1.4",
     "@capacitor/core": "4.1.0",
     "@capacitor/haptics": "4.0.1",
     "@capacitor/keyboard": "4.0.1",
